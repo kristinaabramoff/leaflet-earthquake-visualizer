@@ -4,13 +4,20 @@ let myMap = L.map("map", {
     zoom: 2.5, // Set an initial zoom level to show the whole world
 });
 
-// Adding the tile layer with noWrap set to true
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+// Adding the street layer and topo layer
+let streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
+let topoLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    maxZoom: 17,
+    attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, SRTM | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)'
+});
+
 // Store our API endpoint as queryUrl
-let URL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+let earthquakeURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+let tectonicPlatesURL = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json";
 
 // Function to determine marker color by depth
 function chooseColor(depth){
@@ -22,7 +29,7 @@ function chooseColor(depth){
     else return "#FF0000";
 }
 
-// Function to create features
+// Function to create features for earthquakes
 function createFeatures(earthquakeData) {
     // Define a function that we want to run once for each feature in the features array.
     // Give each feature a popup that describes the place and time of the earthquake.
@@ -43,7 +50,13 @@ function createFeatures(earthquakeData) {
                 fillOpacity: 0.6
             });
         }
-    }).addTo(myMap);
+    });
+
+    // Add the earthquake layer to the map
+    earthquakes.addTo(myMap);
+    
+    // Add the earthquake layer to layer control
+    layerControl.addOverlay(earthquakes, "Earthquakes");
 
     // Create the legend
     createLegend(myMap);
@@ -57,7 +70,7 @@ function createLegend(map) {
         let div = L.DomUtil.create('div', 'info legend'),
             depth = [-10, 10, 30, 50, 70, 90];
 
-        div.innerHTML += "<h3 style='text-align: center'>Depth</h3>";
+        div.innerHTML += "<h4 style='text-align: center'>Depth</h4>";
 
         // Loop through our depth intervals and generate a label with a colored square for each interval
         for (let i = 0; i < depth.length; i++) {
@@ -71,10 +84,38 @@ function createLegend(map) {
     legend.addTo(map);
 }
 
-// Perform a GET request to the query URL
-d3.json(URL).then(function (data) {
-    // Console log the data retrieved
+// Function to create features for tectonic plates
+function createTectonicPlates(tectonicData) {
+    let tectonicPlates = L.geoJSON(tectonicData, {
+        style: {
+            color: "orange",
+            weight: 2
+        }
+    });
+
+    // Add the tectonic plates layer to the map
+    tectonicPlates.addTo(myMap);
+
+    // Add the tectonic plates layer to layer control
+    layerControl.addOverlay(tectonicPlates, "Tectonic Plates");
+}
+
+// Add layer control to the map
+let baseMaps = {
+    "Street Map": streetLayer,
+    "Topographic Map": topoLayer
+};
+
+let layerControl = L.control.layers(baseMaps, {}).addTo(myMap);
+
+// Fetch the earthquake data and create features
+d3.json(earthquakeURL).then(function (data) {
     console.log(data);
-    // Once we get a response, send the data.features object to the createFeatures function.
     createFeatures(data.features);
+});
+
+// Fetch the tectonic plate data and create features
+d3.json(tectonicPlatesURL).then(function (data) {
+    console.log(data);
+    createTectonicPlates(data);
 });
