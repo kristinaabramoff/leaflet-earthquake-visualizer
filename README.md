@@ -49,3 +49,10 @@ CSS: Styled the web pages.
 
 ## Conclusion
 This project successfully visualizes earthquake data provided by the USGS using Leaflet and D3.js. The visualization aids in understanding the distribution and impact of earthquakes globally. The optional part of the challenge adds further insights by plotting tectonic plates data, enhancing the understanding of the relationship between tectonic activity and earthquakes.
+
+References
+
+Datasets used https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson
+
+https://github.com/fraxen/tectonicplates
+
