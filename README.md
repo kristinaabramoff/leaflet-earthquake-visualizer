@@ -25,7 +25,7 @@ In Part 1, the focus was on visualizing an earthquake dataset provided by the US
 - **Legend Integration**:  
   A dynamic legend was included to provide context for the color coding, explaining the relationship between depth and marker color.
 
-### Part 2: Tectonic Plates and Seismic Activity (Optional)
+### Part 2: Tectonic Plates and Seismic Activity
 
 In Part 2, the project was extended by incorporating tectonic plate data to explore the relationship between tectonic boundaries and earthquake occurrences. The following steps were taken:
 
