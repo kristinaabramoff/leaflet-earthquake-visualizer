@@ -37,6 +37,7 @@ In Part 2, the project was extended by incorporating tectonic plate data to expl
   - Earthquake and tectonic plate data were organized into separate overlay layers, allowing users to toggle between datasets.
   - Layer controls were implemented, providing users with the ability to easily switch between different map layers and data sets.
 
+
 ## Technologies Used
 
 - **HTML5**: Structured the web pages.
@@ -46,6 +47,11 @@ In Part 2, the project was extended by incorporating tectonic plate data to expl
 - **CSS3**: Styled the web pages to ensure a clean and user-friendly interface.
 
 ## Deployment
+
+### Example of deployment 
+
+![deployment_screenshot](https://github.com/user-attachments/assets/625998b8-e9cb-4a5b-95ab-25efd8ea662b)
+
 
 The project has been deployed and can be accessed at the following link:  
 [Earthquake Data Visualization] https://kristinaabramoff.github.io/leaflet_deploy/
