@@ -48,7 +48,7 @@ In Part 2, the project was extended by incorporating tectonic plate data to expl
 ## Deployment
 
 The project has been deployed and can be accessed at the following link:  
-[Earthquake Data Visualization](https://kristinaabramoff.github.io/leaflet_deploy/).
+[Earthquake Data Visualization] https://kristinaabramoff.github.io/leaflet_deploy/
 
 ## Conclusion
 
