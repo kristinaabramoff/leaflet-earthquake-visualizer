@@ -7,7 +7,7 @@ This project was developed to assist the USGS in visualizing earthquake data, wi
 
 ## Project Overview
 
-The project repository, titled `leaflet-challenge`, is organized into two key parts:
+The project repository, titled `leaflet-earthquake-visualizer`, is organized into two key parts:
 
 ### Part 1: Earthquake Visualization
 
